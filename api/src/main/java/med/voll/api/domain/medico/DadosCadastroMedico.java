@@ -9,19 +9,19 @@ import med.voll.api.domain.endereco.DadosEndereco;
 
 public record DadosCadastroMedico(
 
-        @NotBlank
+        @NotBlank(message = "Nome é obrigatorio")
         String nome,
-        @NotBlank
-        @Email
+        @NotBlank(message = "Email é obrigatório")
+        @Email(message = "Formato de email é inválido")
         String email,
-        @NotBlank
+        @NotBlank(message = "Telefone é obrigatorio")
         String telefone,
-        @NotBlank
-        @Pattern(regexp = "\\d{4,6}")
+        @NotBlank(message = "CRM é obrigatorio")
+        @Pattern(regexp = "\\d{4,6}", message = "Formato de CRM inválido")
         String crm,
-        @NotNull
+        @NotNull(message = "Especialidade é obrigatorio")
         Especialidade especialidade,
-        @NotNull
+        @NotNull(message = "Dados do endereço são obrigatorios")
         @Valid
         DadosEndereco endereco) {
 }
