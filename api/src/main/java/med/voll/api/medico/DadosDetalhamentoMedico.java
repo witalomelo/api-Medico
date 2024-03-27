@@ -8,7 +8,8 @@ public record DadosDetalhamentoMedico(
         String email,
         String crm,
         String telefone,
-        Especialidade especialidade, Endereco endereco) {
+        Especialidade especialidade,
+        Endereco endereco) {
 
     public DadosDetalhamentoMedico(Medico medico) {
         this(
