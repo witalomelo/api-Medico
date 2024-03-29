@@ -12,7 +12,7 @@ public class AutenticacaoService implements UserDetailsService { //interface que
     @Autowired
     private UsuarioRepository repository;
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { //metodo que vai utilizar o respository para realizar o select no DB
         return repository.findByLogin(username);
     }
 }
