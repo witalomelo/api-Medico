@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AutenticacaoController {
 
     @Autowired
-    private AuthenticationManager manager;
+    private AuthenticationManager manager; //classe do spring responsavel por disparar o processo de autenticação
 
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(token);
+
+        // motodo que devolve objeto que representa o usuário autenticado no sistema.
+        var authentication = manager.authenticate(token); //precisamos passar um token do tipo username authentication token
 
         return ResponseEntity.ok().build();
     }

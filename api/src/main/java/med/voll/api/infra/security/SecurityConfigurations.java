@@ -15,6 +15,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfigurations {
 
+    // configuração do processo de autenticação - stateless
+
+    /*SecurityFilterChain utilizado para configurar o processo de autenticação e autorização;
+    * HttpSecurity permite configurar aspectos relacionados a segurança como proteção CSRF,
+    * tambem podemos definir regras de segurança para diferentes urls;
+    * */
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable()) //Desabilita a proteção CSRF (Cross-Site Request Forgery),
@@ -23,6 +30,7 @@ public class SecurityConfigurations {
     }
 
     @Bean
+    //responsável por autenticar um objeto de autenticação
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
