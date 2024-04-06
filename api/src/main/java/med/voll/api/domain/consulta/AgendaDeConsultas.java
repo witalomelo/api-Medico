@@ -31,14 +31,26 @@ public class AgendaDeConsultas {
         }
 
 
-        var paciente = pacienteRepository.findById(dados.idPaciente()).get();
-        var medico = medicoRepository.findById(dados.idMedico()).get();
+        var paciente = pacienteRepository.getReferenceById(dados.idPaciente());
+        var medico = escolherMedico(dados); //chamando o metodo para as validacoes necessarias
         var consulta = new Consulta(null, medico, paciente, dados.data());
         consultaRepository.save(consulta);
     }
 
-    //implementado do metodo para selecionar medico aleatorio
+    //implementando o metodo para selecionar medico aleatorio
     private Medico escolherMedico(DadosAgendamentoConsulta dados) {
+        //verifica se o id recebido é diferente de null
+        if (dados.idMedico() != null) {
+            return medicoRepository.getReferenceById(dados.idMedico());
+        }
+
+        //caso idMedico seja null se faz necessario a verificação do especialidade
+        if (dados.especialidade() == null) {
+            throw new ValidacaoException("Especialidade é obrigatória quando médico não for escolhido!");
+        }
+
+        //criando metodo para escolha do medico aleatorio em medicoRepository
+        return medicoRepository.escolherMedicoAleatorioLivreNaData(dados.especialidade(), dados.data());
 
     }
 
