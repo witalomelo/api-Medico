@@ -30,6 +30,7 @@ public class AgendaDeConsultas {
             throw new ValidacaoException("Id do medico informado não existe!");
         }
 
+        //validações
 
         var paciente = pacienteRepository.getReferenceById(dados.idPaciente());
         var medico = escolherMedico(dados); //chamando o metodo para as validacoes necessarias
