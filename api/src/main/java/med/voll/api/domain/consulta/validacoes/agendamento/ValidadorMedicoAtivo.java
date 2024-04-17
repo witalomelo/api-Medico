@@ -7,9 +7,9 @@ import med.voll.api.domain.medico.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+//medico deve estar ativo no sistema
 @Component
 public class ValidadorMedicoAtivo implements ValidadorAgendamentoConsulta {
-
     @Autowired
     private MedicoRepository repository;
 
@@ -19,10 +19,10 @@ public class ValidadorMedicoAtivo implements ValidadorAgendamentoConsulta {
             return;
         }
 
-        var medicoEstaAtivo = repository.findAtivoById(dados.idMedico()); //boolean
+        var medicoEstaAtivo = repository.findAtivoById(dados.idMedico());
 
         if(!medicoEstaAtivo) {
-            throw new ValidacaoException("Consulta não pode ser agendada com medido inativo!");
+            throw new ValidacaoException("Consulta não pode ser agendada com medico inativo!");
         }
     }
 }

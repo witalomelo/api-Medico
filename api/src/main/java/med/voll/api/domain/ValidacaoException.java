@@ -3,6 +3,6 @@ package med.voll.api.domain;
 public class ValidacaoException extends RuntimeException {
 
     public ValidacaoException(String mensagem){
-        super(mensagem); //chamndo a classe mae e passando mensagem como parametro
+        super(mensagem); //chamando o construtor da classe mãe usando a palavra super e passando o parâmetro mensage
     }
 }

@@ -28,10 +28,12 @@ public class TratadorDeErros {
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
+    //DTO do erro 400
     private record DadosErroValidacao(String campo, String mensagem) {
-
         public DadosErroValidacao(FieldError erro) {
-            this(erro.getField(), erro.getDefaultMessage());
+
+            this(erro.getField(), //nome do campo
+                    erro.getDefaultMessage()); //mensagem do campo
         }
 
     }

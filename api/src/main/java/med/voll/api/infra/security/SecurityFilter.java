@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import med.voll.api.domain.usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -27,7 +26,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         //logica de recuperar o token
-
         var tokenJWT = recuperarToken(request);
 
         if (tokenJWT != null) {
@@ -39,14 +37,13 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         }
 
-        filterChain.doFilter(request, response); //necessario para chamar os proximos filtros na aplicação
+        filterChain.doFilter(request, response); //necessario para chamar os proximos filtros na aplicaplicaçãoacao
 
     }
 
     private String recuperarToken(HttpServletRequest request) {
         var authorizationHeader = request.getHeader("Authorization");
 
-        //quem faz a verificação do usuario autenticado é o proprio spring
         if (authorizationHeader != null) {
             return authorizationHeader.replace("Bearer ", "");
         }

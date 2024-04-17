@@ -18,13 +18,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfigurations {
 
-    // configuração do processo de autenticação - stateless
-
-    /*SecurityFilterChain utilizado para configurar o processo de autenticação e autorização;
-    * HttpSecurity permite configurar aspectos relacionados a segurança como proteção CSRF,
-    * tambem podemos definir regras de segurança para diferentes urls;
-    * */
-
     @Autowired
     private SecurityFilter securityFilter;
 
@@ -34,14 +27,16 @@ public class SecurityConfigurations {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+//                .requestMatchers(HttpMethod.DELETE, "/medicos").hasRole("ADMIN")
+//                .requestMatchers(HttpMethod.DELETE, "/pacientes").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
-
-    @Bean
     //responsável por autenticar um objeto de autenticação
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
@@ -49,6 +44,7 @@ public class SecurityConfigurations {
     //ByCrypt
     @Bean
     public PasswordEncoder passwordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 

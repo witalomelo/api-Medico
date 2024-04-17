@@ -20,16 +20,13 @@ public class AutenticacaoController {
 
     @Autowired
     private AuthenticationManager manager; //classe do spring responsavel por disparar o processo de autenticação
-
     @Autowired
     private TokenService tokenService;
 
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-
-        // motodo que devolve objeto que representa o usuário autenticado no sistema.
-        var authentication = manager.authenticate(authenticationToken); //precisamos passar um token do tipo username authentication token
+        var authentication = manager.authenticate(authenticationToken);
         var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }

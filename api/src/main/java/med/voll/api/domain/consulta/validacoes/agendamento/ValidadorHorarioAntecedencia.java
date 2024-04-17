@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+//As consultas devem ser agendadas com antecedência mínima de 30 minutos
 @Component("ValidadorHorarioAntecedenciaAgendamento")
 public class ValidadorHorarioAntecedencia implements ValidadorAgendamentoConsulta {
 
@@ -18,7 +19,7 @@ public class ValidadorHorarioAntecedencia implements ValidadorAgendamentoConsult
 
 
         if (diferencaEmMinutos < 30) {
-            throw new ValidacaoException("consulta dever ser agendada com antecedência minima de 30 minutos");
+            throw new ValidacaoException("Consulta dever ser agendada com antecedência minima de 30 minutos");
         }
 
     }

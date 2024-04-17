@@ -12,7 +12,9 @@ public record DadosAgendamentoConsulta(
         Long idMedico,
         @NotNull
         Long idPaciente,
-        @NotNull @Future
+        @NotNull
+        @Future
+//        @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
         LocalDateTime data,
 
         Especialidade especialidade //campo opcional só necessária quando não informar o id do medico

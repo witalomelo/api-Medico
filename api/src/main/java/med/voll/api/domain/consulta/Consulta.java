@@ -31,7 +31,7 @@ public class Consulta {
     @JoinColumn(name = "paciente_id")//especificar a coluna na tabela do banco de dados que representa esta relação
     private Paciente paciente;
 
-    private LocalDateTime data;
+    private LocalDateTime data; //mascara "2023-10-10T10:00"
 
     @Column(name = "motivoCancelamento")
     @Enumerated(EnumType.STRING)

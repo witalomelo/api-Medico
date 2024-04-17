@@ -26,7 +26,7 @@ public class TokenService {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.create()
                     .withIssuer("API Voll.med")
-                    .withSubject(usuario.getUsername())
+                    .withSubject(usuario.getLogin())
                     .withExpiresAt(dataExpiracao())
                     //.withClaim("id", usuario.getId())
                     .sign(algoritmo);
@@ -51,6 +51,7 @@ public class TokenService {
         }
     }
 
+    //expiração do token em 03hs
     private Instant dataExpiracao() {
         return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
     }
